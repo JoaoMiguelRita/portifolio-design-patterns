@@ -1,0 +1,64 @@
+public Cliente(String nome, 
+                String sobrenome,
+                String email,
+                String telefone,
+                Endereco endereco,
+                String cpf,
+                Date nascimento,
+                String cidade,
+                String estado,
+                String cep,
+                String pais) {
+    this.nome = nome;
+    this.sobrenome = sobrenome;
+    this.email = email;
+    this.telefone = telefone;
+    this.setEndereco(endereco);
+    this.cpf = cpf,
+    this.nascimento = nascimento,
+    this.cidade = cidade,
+    this.estado = estado,
+    this.cep = cep,
+    this.pais = pais
+}
+
+public class PagamentoService {
+    public void pagar(String tipo, valor) {
+        switch(tipo) {
+            case "pix": new Pix().pagar(valor); break;
+            case "boleto": new Boleto().pagar(valor); break;
+            case "cartao": new Cartao().pagar(valor); break;
+        }
+    }
+}
+
+public class FaturaService {
+    public void historico(String tipo) {
+        switch(tipo) {
+            case "pix": new Pix().historico(); break;
+            case "boleto": new Boleto().historico(); break;
+            case "cartao": new Cartao().historico(); break;
+        }
+    }
+}
+
+public class Config {
+    public static String urlBanco = "";
+    public static String usuarioBanco = "admin";
+    public static String ambiente = "producao";
+    public static int tentativasLogin = 3;
+}
+
+public class LoginService {
+    public void autenticar() {
+        setTentativasLogin(getTentativasLogin() + 1);
+    }
+}
+
+Pedido rascunho = new Pedido();
+rascunho.cliente = pedido.cliente;
+rascunho.itens = pedido.itens;
+rascunho.valorTotal = pedido.valorTotal;
+rascunho.desconto = pedido.desconto;
+rascunho.endereco = "Rua das Flores, 100";
+Pedido copiaRascunho = rascunho;
