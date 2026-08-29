@@ -1,31 +1,22 @@
----
-title: "Atividade 06: Abstract Factory"
-description: "Exercícios para praticar o padrão de projeto Abstract Factory em contextos reais de desenvolvimento de software."
----
-
 # Exercício 1: Aplicações
 
-Para cada cenário abaixo, indique se o **padrão Abstract Factory** é apropriado ou **não** e **justifique em 2–3 frases**.
+### Para cada cenário abaixo, indique se o **padrão Abstract Factory** é apropriado ou **não** e **justifique em 2–3 frases**.
 
 ### 1. Uma aplicação de interface gráfica que precisa **trocar o tema/plataforma** (Windows, macOS, Linux). Cada plataforma exige uma família coerente de componentes (botão, checkbox, janela), e misturar componentes de plataformas diferentes quebra a interface.
-- R:
+- Faz sentido usar Abstract Factory. Para cada plataforma, terão os requisitos de bibliotecas especificas, apesar de terem a mesma finalidade, com isso é valido aplicar asse design pattern.
 
 ### 2. Uma classe simples `Ponto` com apenas **dois campos obrigatórios** (`x`, `y`), utilizada em um sistema de CAD e instanciada dezenas de vezes por segundo através do construtor tradicional.
-- R:
+- Não faz sentido usar Factory Method, não adianta criar um canhão pra mantar a formiga, o Factory Method é indicado para diversas classes que realizam metodos semelhantes.
 
 ### 3. Um módulo de acesso a bancos de dados que precisa manter **famílias consistentes por fornecedor**: para MySQL existem `ConexaoMySQL`, `ComandoMySQL` e `TransacaoMySQL`; para PostgreSQL existem as versões `PostgreSQL`. Todos os objetos usados juntos devem vir **do mesmo fornecedor**.
-- R:
+- Faz sentido usar Abstract Factory. Para cada banco de dados, terão os requisitos de configurações especificas, apesar de terem a mesma finalidade, com isso é valido aplicar asse design pattern.
 
 ### 4. Uma loja que vende **kits de móveis por estilo** (moderno, vitoriano, art déco). Cada kit é composto por cadeira + sofá + mesa de centro e o cliente espera que os três **combinem entre si**.
-- R:
+- Faz sentido usar Abstract Factory. Por se relacionarem entre si, e fazerem parte da mesma familia, é valido aplicar.
+
 
 ### 5. Uma classe `Produto` com três campos obrigatórios (`nome`, `preco`, `quantidadeEstoque`), criada em um único ponto do sistema através do construtor tradicional e sem variações.
-- R:
-
-Para cada item, responda:
-
-- “Faz sentido usar Abstract Factory” **ou** “Não faz sentido usar Abstract Factory”.
-- Explique rapidamente o porquê (coerência de famílias, acoplamento, troca de variantes, overengineering, etc.).
+- Não faz sentido usar Factory Method, não adianta criar um canhão pra mantar a formiga, o Factory Method é indicado para diversas classes que realizam metodos semelhantes.
 
 ---
 
@@ -33,15 +24,7 @@ Para cada item, responda:
 
 Crie uma **analogia própria** para explicar o padrão Abstract Factory para alguém que não é da área de TI.
 
-Na aula, usamos a **coleção de roupas**: uma coleção de verão tem peças que combinam entre si, e misturar verão + inverno no mesmo look "quebra" a harmonia. Agora crie uma **outra** analogia.
-
-Descreva uma situação do **mundo real** em que:
-
-- existam **famílias** de itens que devem ser usadas **juntas** (coerência),
-- existam **variantes** diferentes da mesma família,
-- e misturar itens de famílias/variantes diferentes gere um **resultado incoerente**.
-
-- R:
+- Uma pentiadeira, na qual contém uma familia de maquiagens, acessórios, produtos, ferramentas, perfumes, na qual diverentes coisas podem combinar entre si.
 
 ---
 
@@ -75,13 +58,13 @@ public class Aplicacao {
 Responda:
 
 ### 1. Por que essa forma de **criar os componentes com `new`** é um problema de design?
-R: 
+- Exige que a aplicação recompile cada objeto novo.
 
 ### 2. Que tipo de **bug ou comportamento estranho** pode acontecer quando o código mistura componentes de famílias diferentes (como no `linux`)? E o que aconteceria ao adicionar um novo sistema operacional (ex.: `mac`)?
-R: 
+- Poderia causar falhas ao capturar bibliotecas, e o mac exigiria de um novo else if, e novos testes nos ifs que já existiam para garantir que não quebre.
 
 ### 3. Proponha uma solução usando o padrão **Abstract Factory**, explicando em linhas gerais: os **produtos abstratos**, a **fábrica abstrata**, as **fábricas concretas** por SO e como o cliente (a `Aplicacao`) passaria a receber a fábrica.
-R: 
+- Os produtos concontreos pode se entende com as diferentes classes já combinadas entre si, e elas extendem do objeto cru, então no exemplo Mac seria uma classe extendida de Aplicacao, e possuiria dentro dela somente os componentes para exibir no Mac. A fábrica abstrata juntaria além de componentes do Mac, protocolos padrão também compartilhados sobre outros SO, nesse tudo deve ser abstrato. Por fim, as fábricas concretas que devem implementar a fabrica abstrata, e dentro dela junta tudo o que é necessário para que o Mac fique pronto, assim fica subentendido pela aplicação que ao chamar um BotaoMac, o objeto de referencia se trata de um mac.
 
 ---
 
