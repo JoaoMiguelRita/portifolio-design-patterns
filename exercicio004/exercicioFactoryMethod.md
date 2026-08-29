@@ -124,3 +124,81 @@ Implemente, em Java, um sistema que **centralize a criação do notificador** em
    - Explique, em um comentário ou README, como adicionar um novo canal (ex.: `WhatsApp`) exigiria **apenas** uma nova subclasse de `Notificador` e uma nova subclasse de `NotificacaoService`, sem alterar o fluxo existente.
 
 - R:
+
+```java
+Public interface Notificador() {
+    void enviar(String destinatario, String mensagem);
+}
+
+public class EmailNotificador() {
+    private void enviar() {
+        // Enviar do jeito email
+    }
+}
+
+public class SmsNotificador() {
+    private void enviar() {
+        // Enviar do jeito Sms
+    }
+}
+
+public class PushNotificador() {
+    private void enviar() {
+        // Enviar do jeito Push
+    }
+}
+
+public abstract class NotificacaoService() {
+    public void notificar(String destinatario, String mensagem){
+        Notificador notificador = criarNotificacao();
+        notificador.enviar();
+    }
+
+    protected abstract Notificador enviar();
+}
+
+public class EmailService extends NotificacaoService {
+    @Override
+    protected void enviar(String d, String m) {
+        // Particularidades do envio de email
+        void enviar();
+    }
+}
+
+public class SmsService extends NotificacaoService {
+    @Override
+    protected void enviar(String d, String m) {
+        // Particularidades do envio de sms
+        void enviar();
+    }
+}
+
+public class PushService extends NotificacaoService {
+    @Override
+    protected void enviar(String d, String m) {
+        // Particularidades do envio de email
+        void enviar();
+    }
+}
+```
+
+- Agora para que seja possível adicionar a notificação por Whatsapp, bastaria criar a class principal , e acrescentar a subclass que extende Notificação Service.
+
+```java 
+public class WhatsapplNotificador() {
+    // atributos whatsapp
+    private void enviar() {
+        // Enviar do jeito whatsapp
+    }
+}
+```
+
+```java 
+public class WhatsappService extends NotificacaoService {
+    @Override
+    protected void enviar(String d, String m) {
+        // Particularidades do envio de Whatsapp
+        void enviar();
+    }
+}
+```
